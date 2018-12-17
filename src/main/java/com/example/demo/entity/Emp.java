@@ -2,7 +2,10 @@ package com.example.demo.entity;
 
 import lombok.Data;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,7 +19,8 @@ import java.time.LocalDate;
 @Entity
 public class Emp implements Serializable {
     @Id
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String firstName;
 
