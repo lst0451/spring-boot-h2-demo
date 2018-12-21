@@ -7,6 +7,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import javax.xml.transform.Result;
 import java.util.*;
@@ -83,6 +85,21 @@ public class JavaTest {
         });
 
     }
+
+
+    @Test
+    public void testUrlPlaceholder(){
+        Mono<String> resp = WebClient.create()
+                .get()
+                //多个参数也可以直接放到map中,参数名与placeholder对应上即可
+                .uri("http://www.baidu.com/s?wd={key}&other={another}","北京天气","test") //使用占位符
+                .retrieve()
+                .bodyToMono(String.class);
+        System.out.println("result:{}"+resp.block());
+
+    }
+
+
 
 
 }
